@@ -36,15 +36,13 @@ namespace SalesWebMVC.Controllers
             return View(viewModel);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Seller seller)
         {
             if (!ModelState.IsValid)
             {
-                List<Department> departments1 = await _departmentService.FindAllAsync();
-                var departments = departments1;
+                var departments = await _departmentService.FindAllAsync();
                 var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
                 return View(viewModel);
             }
@@ -82,7 +80,6 @@ namespace SalesWebMVC.Controllers
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
         }
-
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -142,6 +139,7 @@ namespace SalesWebMVC.Controllers
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
         }
+
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel
@@ -150,26 +148,6 @@ namespace SalesWebMVC.Controllers
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             };
             return View(viewModel);
-        }
-
-        [Serializable]
-        private class IntegrityException : Exception
-        {
-            public IntegrityException()
-            {
-            }
-
-            public IntegrityException(string message) : base(message)
-            {
-            }
-
-            public IntegrityException(string message, Exception innerException) : base(message, innerException)
-            {
-            }
-
-            protected IntegrityException(SerializationInfo info, StreamingContext context) : base(info, context)
-            {
-            }
         }
     }
 }
