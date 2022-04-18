@@ -49,6 +49,10 @@ namespace SalesWebMVC
             services.AddScoped<DepartmentService>();
             services.AddScoped<SalesRecordService>();
             
+<<<<<<< HEAD
+=======
+            
+>>>>>>> ad50030938b420eb470532e2491fa5a879752a85
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
